@@ -91,7 +91,7 @@ FeedBridge.prototype.discover = function(discoverd) {
  *  INSTANCE
  *  This is called when the Bridge is no longer needed. When
  */
-FeedBridge.prototype.connect = function() {
+FeedBridge.prototype.connect = function(connectd) {
     var self = this;
     if (!self.native) {
         return;
