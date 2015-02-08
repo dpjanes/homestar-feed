@@ -25,7 +25,6 @@ exports.Model = iotdb.make_model('USGSEarthquake')
     .make();
 
 exports.binding = {
-    name: "USGSEarthquake",
     model: exports.Model,
     initd: {
         iri: 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom'
