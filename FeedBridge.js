@@ -55,6 +55,7 @@ var FeedBridge = function(initd, native) {
         iri: null,
         fresh: false,
         track_links: true,
+        name: null,
     });
 
     self.native = native;
@@ -92,7 +93,7 @@ FeedBridge.prototype.discover = function(discoverd) {
         return;
     }
 
-    self.discovered(new FeedBridge(self.initd, true));
+    self.discovered(new FeedBridge(self.initd, {}));
 };
 
 /**
@@ -211,7 +212,7 @@ FeedBridge.prototype.meta = function() {
 
     return {
         "iot:thing": _.id.thing_urn.unique_hash("Feed", self.initd.iri),
-        "iot:name": self.native.friendlyName || "Feed",
+        "iot:name": self.initd.name || self.native.name || "Feed",
     };
 };
 
@@ -288,6 +289,13 @@ FeedBridge.prototype._process = function (body) {
                 continue;
             }
 
+            // metadata
+            if (item.meta.title !== self.initd.name) {
+                self.initd.name = item.meta.title;
+                self.pulled();
+            }
+
+            // ...
             if (self.seend[item.guid] && self.initd.track_links) {
                 continue;
             }
