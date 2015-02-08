@@ -26,6 +26,8 @@ var iotdb = require('iotdb')
 var _ = iotdb.helpers;
 
 var unirest = require('unirest')
+var stream = require('stream');
+var FeedParser = require('feedparser');
 
 var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
@@ -52,10 +54,16 @@ var FeedBridge = function(initd, native) {
         poll: 120,
         iri: null,
         fresh: false,
-        track_links: false,
+        track_links: true,
     });
 
     self.native = native;
+
+    if (self.native) {
+        self.seend = {};
+        self.started = new Date();
+        self.connectd = {};
+    }
 };
 
 /* --- lifecycle --- */
@@ -96,6 +104,27 @@ FeedBridge.prototype.connect = function(connectd) {
     if (!self.native) {
         return;
     }
+
+    self.connectd = _.defaults(connectd, {});
+
+    self._setup_polling();
+    self.pull();
+};
+
+FeedBridge.prototype._setup_polling = function() {
+    var self = this;
+    if (!self.initd.poll) {
+        return;
+    }
+
+    var timer = setInterval(function() {
+        if (!self.native) {
+            clearInterval(timer);
+            return;
+        }
+
+        self.pull();
+    }, self.initd.poll * 1000);
 };
 
 FeedBridge.prototype._forget = function() {
@@ -121,6 +150,8 @@ FeedBridge.prototype.disconnect = function() {
     if (!self.native || !self.native) {
         return;
     }
+
+    self._forget();
 };
 
 /* --- data --- */
@@ -152,6 +183,8 @@ FeedBridge.prototype.pull = function() {
     if (!self.native) {
         return;
     }
+
+    self._fetch();
 };
 
 /* --- state --- */
@@ -177,10 +210,8 @@ FeedBridge.prototype.meta = function() {
     }
 
     return {
-        "iot:thing": _.id.thing_urn.unique("Feed", self.native.uuid),
+        "iot:thing": _.id.thing_urn.unique_hash("Feed", self.initd.iri),
         "iot:name": self.native.friendlyName || "Feed",
-        "schema:manufacturer": "http://www.belkin.com/",
-        "schema:model": "http://www.belkin.com/us/p/P-F7C027/",
     };
 };
 
@@ -219,23 +250,21 @@ FeedBridge.prototype._fetch = function () {
 
     logger.info({
         method: "_fetch",
-        iri: self.iri,
+        iri: self.initd.iri,
     }, "called");
 
     unirest
-        .get(self.iri)
+        .get(self.initd.iri)
         .end(function (result) {
             if (result.error) {
                 logger.error({
                     method: "_fetch",
-                    iri: self.iri,
+                    iri: self.initd.iri,
                     error: result.error,
                 }, "can't get feed");
             } else {
                 self._process(result.body);
             }
-
-            self.poll_reschedule();
         });
 };
 
@@ -248,7 +277,7 @@ FeedBridge.prototype._process = function (body) {
     s.push(null);
 
     var fp = new FeedParser({
-        feedurl: self.iri
+        feedurl: self.initd.iri
     });
     fp.on('error', function () {});
     fp.on('readable', function () {
@@ -259,24 +288,33 @@ FeedBridge.prototype._process = function (body) {
                 continue;
             }
 
-            if (self.seend[item.guid] && self.track_links) {
+            if (self.seend[item.guid] && self.initd.track_links) {
                 continue;
             }
             self.seend[item.guid] = 1;
 
             var date = item.date;
             if (!date) {
-                if (self.fresh) {
+                if (self.initd.fresh) {
                     continue;
                 }
             } else {
                 item.is_fresh = date.getTime() >= self.started.getTime();
-                if (self.fresh && !item.is_fresh) {
+                if (self.initd.fresh && !item.is_fresh) {
                     continue;
                 }
             }
 
-            self.pulled(self._flatten(item));
+            if (self.connectd.data_in) {
+                var paramd = {
+                    rawd: self._flatten(item),
+                    cookd: {},
+                }
+                self.connectd.data_in(paramd);
+                self.pulled(paramd.cookd);
+            } else {
+                self.pulled(self._flatten(item));
+            }
         }
     });
 
