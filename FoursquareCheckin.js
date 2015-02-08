@@ -11,33 +11,15 @@
 var iotdb = require("iotdb")
 
 exports.Model = iotdb.make_model('FoursquareCheckin')
-    .attribute(
-        iotdb.make_iri("wikipedia:check-in", "where")
-            .reading()
-    )
-    .attribute(
-        iotdb.make_string(":name")
-            .reading()
-    )
-    .attribute(
-        iotdb.make_datetime(":timestamp")
-            .reading()
-    )
-    .attribute(
-        iotdb.make_number(":latitude")
-            .reading()
-            .vector("latitude/longitude")
-    )
-    .attribute(
-        iotdb.make_number(":longitude")
-            .reading()
-            .vector("latitude/longitude")
-    )
-    .attribute(
-        iotdb.make_boolean(":flag", "fresh")
-            .reading()
-    )
-    .driver_identity(":feed")
+    .i("where", iotdb.string.iri, { "iot:purpose", "wikipedia:check-in" }),
+    .i("name", iotdb.string)
+    .i("timestamp", iotdb.datetime.timestamp)
+    .i("latitude", iotdb.vector.number.ll.latitude),
+    .i("longitude", iotdb.vector.number.ll.longitude),
+    .i("fresh", iotdb.boolean.flag),
+    .make();
+
+/*
     .driver_in(function(paramd) {
         // paramd.libs.log(paramd.driverd)
 
@@ -67,3 +49,4 @@ exports.Model = iotdb.make_model('FoursquareCheckin')
         }
     })
     .make()
+*/

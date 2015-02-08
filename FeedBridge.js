@@ -45,10 +45,10 @@ var logger = bunyan.createLogger({
  *  <li><code>disconnnected</code> - this has been disconnected from a Thing
  *  </ul>
  */
-var FeedBridge = function(paramd, native) {
+var FeedBridge = function(initd, native) {
     var self = this;
 
-    self.paramd = _.defaults(paramd, {
+    self.initd = _.defaults(initd, {
         poll: 120,
         iri: null,
         fresh: false,
@@ -72,11 +72,11 @@ var FeedBridge = function(paramd, native) {
 FeedBridge.prototype.discover = function(discoverd) {
     var self = this;
 
-    if (!self.paramd.iri && discoverd && discoved.iri) {
-        self.paramd.iri = discoverd.iri;
+    if (!self.initd.iri && discoverd && discoved.iri) {
+        self.initd.iri = discoverd.iri;
     }
 
-    if (!self.paramd.iri) {
+    if (!self.initd.iri) {
         logger.error({
             method: "discover",
             cause: "all Feeds must be explicitly set up with an IRI",
@@ -84,7 +84,7 @@ FeedBridge.prototype.discover = function(discoverd) {
         return;
     }
 
-    self.discovered(new FeedBridge(self.paramd, true));
+    self.discovered(new FeedBridge(self.initd, true));
 };
 
 /**
