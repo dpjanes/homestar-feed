@@ -11,50 +11,38 @@
 var iotdb = require("iotdb")
 
 exports.Model = iotdb.make_model('TWNCurrentWeather')
-    .attribute( 
-        iotdb.make_number(":sensor.temperature")
-            .unit(":temperature.si.celsius")
-            .arithmetic_precision(0)
-            .reading()
-    )
-    .attribute( 
-        iotdb.make_number(":sensor.humidity")
-            .unit(":math.fraction.percent")
-            .arithmetic_precision(0)
-            .reading()
-    )
-    .attribute( 
-        iotdb.make_string(":message", "conditions")
-            .reading()
-    )
-    .driver_identity(":feed")
-    .driver_setup(function(paramd) {
-        paramd.initd.track_links = false
-    })
-    .driver_in(function(paramd) {
-        if (paramd.driverd.title !== "Current Weather") {
-            return
-        }
+    .i("temperature", iotdb.sensor.number.temperature.celsius)
+    .i("humidity", iotdb.sensor.percent.humidity)
+    .i("conditions", iotdb.string)
+    .make();
 
-        var description = paramd.driverd.description
-        if (description !== undefined) {
-            // 'A few clouds,\r\n\t\t11&nbsp;&deg;C\t\t, Humidity\t\t43%\t\t, Wind\t\tSW 9km/h'
-            var match = description.match(/^(.*?),/)
-            if (match) {
-                paramd.thingd.conditions = match[1]
+exports.binding = {
+    model: exports.Model,
+    bridge: require('./FeedBridge').Bridge,
+    connectd: {
+        data_in: function(paramd) {
+            if (paramd.rawd.title !== "Current Weather") {
+                return
             }
 
-            var match = description.match(/([\d.]+)&nbsp;&deg;C/)
-            if (match) {
-                paramd.thingd.temperature = match[1]
-            }
+            var description = paramd.rawd.description
+            if (description !== undefined) {
+                // 'A few clouds,\r\n\t\t11&nbsp;&deg;C\t\t, Humidity\t\t43%\t\t, Wind\t\tSW 9km/h'
+                var match = description.match(/^(.*?),/)
+                if (match) {
+                    paramd.cookd.conditions = match[1]
+                }
 
-            var match = description.match(/Humidity\t\t(\d+)%\t\t/)
-            if (match) {
-                paramd.thingd.humidity = match[1]
-            }
-        }
+                var match = description.match(/([-]?[\d.]+)&nbsp;&deg;C/)
+                if (match) {
+                    paramd.cookd.temperature = match[1]
+                }
 
-        // paramd.libs.log(paramd.thingd)
-    })
-    .make()
+                var match = description.match(/Humidity\t\t(\d+)%\t\t/)
+                if (match) {
+                    paramd.cookd.humidity = match[1]
+                }
+            }
+        },
+    },
+};
