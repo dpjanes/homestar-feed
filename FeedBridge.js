@@ -80,7 +80,7 @@ var FeedBridge = function(initd, native) {
 FeedBridge.prototype.discover = function(discoverd) {
     var self = this;
 
-    if (!self.initd.iri && discoverd && discoved.iri) {
+    if (!self.initd.iri && discoverd && discoverd.iri) {
         self.initd.iri = discoverd.iri;
     }
 
@@ -299,7 +299,7 @@ FeedBridge.prototype._process = function (body) {
                     continue;
                 }
             } else {
-                item.is_fresh = date.getTime() >= self.started.getTime();
+                item.is_fresh = ( date.getTime() >= self.started.getTime() ) ? true : false;
                 if (self.initd.fresh && !item.is_fresh) {
                     continue;
                 }
