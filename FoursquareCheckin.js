@@ -8,15 +8,15 @@
 
 "use strict";
 
-var iotdb = require("iotdb")
+var homestar = require("homestar")
 
-exports.Model = iotdb.make_model('FoursquareCheckin')
-    .i("where", iotdb.string.iri, { "iot:purpose": "wikipedia:check-in" })
-    .i("name", iotdb.string)
-    .i("timestamp", iotdb.datetime.timestamp)
-    .i("latitude", iotdb.vector.number.ll.latitude)
-    .i("longitude", iotdb.vector.number.ll.longitude)
-    .i("fresh", iotdb.boolean.flag)
+exports.Model = homestar.make_model('FoursquareCheckin')
+    .i("where", homestar.string.iri, { "iot:purpose": "wikipedia:check-in" })
+    .i("name", homestar.string)
+    .i("timestamp", homestar.datetime.timestamp)
+    .i("latitude", homestar.vector.number.ll.latitude)
+    .i("longitude", homestar.vector.number.ll.longitude)
+    .i("fresh", homestar.boolean.flag)
     .make();
 
 exports.binding = {

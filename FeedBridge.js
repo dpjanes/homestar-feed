@@ -22,8 +22,8 @@
 
 "use strict";
 
-var iotdb = require('iotdb')
-var _ = iotdb.helpers;
+var homestar = require('homestar')
+var _ = homestar._;
 
 var unirest = require('unirest')
 var stream = require('stream');

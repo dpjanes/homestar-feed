@@ -8,12 +8,12 @@
 
 "use strict";
 
-var iotdb = require("iotdb")
+var homestar = require("homestar")
 
-exports.Model = iotdb.make_model('TWNCurrentWeather')
-    .i("temperature", iotdb.sensor.number.temperature.celsius)
-    .i("humidity", iotdb.sensor.percent.humidity)
-    .i("conditions", iotdb.string)
+exports.Model = homestar.make_model('TWNCurrentWeather')
+    .i("temperature", homestar.sensor.number.temperature.celsius)
+    .i("humidity", homestar.sensor.percent.humidity)
+    .i("conditions", homestar.string)
     .make();
 
 exports.binding = {
