@@ -32,11 +32,15 @@ exports.binding = {
     },
     connectd: {
         data_in: function(paramd) {
-            if (paramd.rawd.date) {
+            if (paramd.rawd.is_fresh !== undefined) {
+                paramd.cookd.fresh = paramd.rawd.is_fresh
+            }
+
+            if (paramd.rawd.date !== undefined) {
                 paramd.cookd.timestamp = paramd.rawd.date
             }
 
-            if (paramd.rawd.title) {
+            if (paramd.rawd.title !== undefined) {
                 paramd.cookd.name = paramd.rawd.title
 
                 var match = paramd.rawd.title.match(/^M ([0-9][^ ]*)/)
@@ -51,7 +55,7 @@ exports.binding = {
             }
 
             var p = paramd.rawd.georss_point
-            if (p) {
+            if (p !== undefined) {
                 var parts = p.split(' ')
                 if (parts.length == 2) {
                     paramd.cookd.latitude = parseFloat(parts[0])
@@ -60,7 +64,7 @@ exports.binding = {
             }
 
             var e = paramd.rawd.georss_elev
-            if (e) {
+            if (e !== undefined) {
                 paramd.cookd.elevation = parseInt(e)
             }
         },
