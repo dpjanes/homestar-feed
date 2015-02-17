@@ -24,12 +24,12 @@
 
 var homestar = require('homestar')
 var _ = homestar._;
+var bunyan = homestar.bunyan;
 
 var unirest = require('unirest')
 var stream = require('stream');
 var FeedParser = require('feedparser');
 
-var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'homestar-feed',
     module: 'FeedBridge',
