@@ -1,15 +1,14 @@
-/*
- *  Use a Model to see data semantically
- *
- */
+try {
+    var model = require('homestar-feed')
+} catch (x) {
+    var model = require('../index')
+}
 
-var homestar = require("homestar");
-var _ = homestar._;
+var _ = model.homestar._;
 
-var ModelBinding = require('../TWNCurrentWeather');
-var feed_iri = "http://rss.theweathernetwork.com/weather/caon0696";
-
-wrapper = _.bridge_wrapper(ModelBinding.binding, { iri: feed_iri });
+wrapper = model.wrap("TWNCurrentWeather", {
+    feed: "http://rss.theweathernetwork.com/weather/caon0696"
+});
 wrapper.on('model', function(model) {
     model.on_change(function(model) {
         console.log("+ state\n ", model.thing_id(), model.state());

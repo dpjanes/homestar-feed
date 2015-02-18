@@ -25,8 +25,8 @@
 var homestar = require('homestar')
 var _ = homestar._;
 var bunyan = homestar.bunyan;
+var unirest = homestar.unirest;
 
-var unirest = require('unirest')
 var stream = require('stream');
 var FeedParser = require('feedparser');
 
@@ -52,7 +52,7 @@ var FeedBridge = function(initd, native) {
 
     self.initd = _.defaults(initd, {
         poll: 120,
-        iri: null,
+        feed: null,
         fresh: false,
         track_links: true,
         name: null,
@@ -78,18 +78,14 @@ var FeedBridge = function(initd, native) {
  *  <li>create an FeedBridge(native)
  *  <li>call <code>self.discovered(bridge)</code> with it
  */
-FeedBridge.prototype.discover = function(discoverd) {
+FeedBridge.prototype.discover = function() {
     var self = this;
 
-    if (!self.initd.iri && discoverd && discoverd.iri) {
-        self.initd.iri = discoverd.iri;
-    }
-
-    if (!self.initd.iri) {
+    if (!self.initd.feed) {
         logger.error({
             method: "discover",
             cause: "all Feeds must be explicitly set up with an IRI",
-        }, "no 'iri' parameter - cannot do discovery");
+        }, "no 'feed' parameter - cannot do discovery");
         return;
     }
 
@@ -211,7 +207,7 @@ FeedBridge.prototype.meta = function() {
     }
 
     return {
-        "iot:thing": _.id.thing_urn.unique_hash("Feed", self.initd.iri),
+        "iot:thing": _.id.thing_urn.unique_hash("Feed", self.initd.feed),
         "iot:name": self.initd.name || self.native.name || "Feed",
     };
 };
@@ -250,16 +246,16 @@ FeedBridge.prototype._fetch = function () {
 
     logger.info({
         method: "_fetch",
-        iri: self.initd.iri,
+        feed: self.initd.feed,
     }, "called");
 
     unirest
-        .get(self.initd.iri)
+        .get(self.initd.feed)
         .end(function (result) {
             if (result.error) {
                 logger.error({
                     method: "_fetch",
-                    iri: self.initd.iri,
+                    feed: self.initd.feed,
                     error: result.error,
                 }, "can't get feed");
             } else {
@@ -277,7 +273,7 @@ FeedBridge.prototype._process = function (body) {
     s.push(null);
 
     var fp = new FeedParser({
-        feedurl: self.initd.iri
+        feedurl: self.initd.feed
     });
     fp.on('error', function () {});
     fp.on('readable', function () {

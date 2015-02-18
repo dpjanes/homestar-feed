@@ -22,10 +22,14 @@
 
 "use strict";
 
-exports.FeedBridge = require('./FeedBridge').Bridge;
-
+exports.Bridge = require('./FeedBridge').Bridge;
 exports.bindings = [
     require('./FoursquareCheckin').binding,
     require('./TWNCurrentWeather').binding,
     require('./USGSEarthquake').binding,
 ];
+
+exports.homestar = require("homestar");
+exports.wrap = function(name, initd) {
+    return exports.homestar.make_wrap(name, exports.bindings, initd)
+};

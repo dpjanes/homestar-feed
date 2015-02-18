@@ -1,18 +1,20 @@
 /*
- *  Use a Model to see data semantically
- *
  *  NOTE: your foursquare checkin URL is required as an argument
  *  Get it from this page:
  *  https://foursquare.com/feeds/
  */
 
-var homestar = require("homestar");
-var _ = homestar._;
+try {
+    var model = require('homestar-feed')
+} catch (x) {
+    var model = require('../index')
+}
 
-var ModelBinding = require('../FoursquareCheckin');
-var feed_iri = process.argv[process.argv.length - 1];
+var _ = model.homestar._;
 
-wrapper = _.bridge_wrapper(ModelBinding.binding, { iri: feed_iri });
+wrapper = model.wrap("FoursquareCheckin", {
+    feed: process.argv[2]
+});
 wrapper.on('model', function(model) {
     model.on_change(function(model) {
         console.log("+ state\n ", model.thing_id(), model.state());

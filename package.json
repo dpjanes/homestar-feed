@@ -1,0 +1,22 @@
+{
+    "author": "David P. Janes <davidjanes@iotdb.org> (https://iotdb.org)", 
+    "bugs": {
+        "url": "https://github.com/dpjanes/homestar-feed/issues"
+    }, 
+    "dependencies": {
+        "feedparser": "~0.19.2", 
+        "homestar": ">=0.0.46"
+    }, 
+    "description": "HomeStar / IOTDB Bridge for RSS / Atom Feeds", 
+    "homepage": "https://homestar.io", 
+    "homestar": {}, 
+    "license": "Apache-2.0", 
+    "main": "index.js", 
+    "name": "homestar-feed", 
+    "private": false, 
+    "repository": {
+        "type": "git", 
+        "url": "https://github.com/dpjanes/homestar-feed"
+    }, 
+    "version": "0.0.1"
+}
