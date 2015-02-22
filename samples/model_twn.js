@@ -10,10 +10,10 @@ wrapper = model.wrap("TWNCurrentWeather", {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"
 });
 wrapper.on('model', function(model) {
-    model.on_change(function(model) {
+    model.on("state", function(model) {
         console.log("+ state\n ", model.thing_id(), model.state());
     });
-    model.on_meta(function(model) {
+    model.on("meta", function(model) {
         console.log("+ meta\n ", model.thing_id(), _.ld.compact(model.meta().state()));
     });
     

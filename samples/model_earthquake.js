@@ -15,7 +15,7 @@ wrapper.on('model', function(model) {
         console.log("+ meta\n ", model.thing_id(), _.ld.compact(model.meta().state()));
     });
     /*
-    model.on_meta(function(model) {
+    model.on("meta", function(model) {
         console.log("+ meta\n ", model.thing_id(), _.ld.compact(model.meta().state()));
     });
     */
