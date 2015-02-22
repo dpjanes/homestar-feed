@@ -9,7 +9,7 @@ var _ = model.homestar._;
 wrapper = model.wrap("TWNCurrentWeather", {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"
 });
-wrapper.on('model', function(model) {
+wrapper.on('thing', function(model) {
     model.on("state", function(model) {
         console.log("+ state\n ", model.thing_id(), model.state());
     });

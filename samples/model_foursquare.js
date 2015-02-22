@@ -15,7 +15,7 @@ var _ = model.homestar._;
 wrapper = model.wrap("FoursquareCheckin", {
     feed: process.argv[2]
 });
-wrapper.on('model', function(model) {
+wrapper.on('thing', function(model) {
     model.on("state", function(model) {
         console.log("+ state\n ", model.thing_id(), model.state());
     });
