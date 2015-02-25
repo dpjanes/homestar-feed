@@ -7,6 +7,21 @@ See <a href="samples/">the samples</a> for details how to add to your project.
 particularly <code>model\_\*.js</code> for "standalone" and <code>iotdb\_\*.js</code>
 for use in IOTDB / HomeStar projects.
 
+# Quick Start
+
+Get earthquakes as they happen (more or less)
+
+	$ npm install -g homestar
+	$ npm install iotdb
+	$ homestar install homestar-feed
+	$ node
+	>>> iotdb = require('iotdb')
+	>>> iot = iotdb.iot()
+	>>> things = iot.connect("USGSEarthquake")
+	>>> things.on("state", function(thing) {
+        console.log(thing.state());
+    });
+
 ## FoursquareCheckin
 
 Note that you'll have to find your private foursquare feed here
