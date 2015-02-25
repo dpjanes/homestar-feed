@@ -22,7 +22,7 @@
 
 "use strict";
 
-var iotdb = require('iotdb')
+var iotdb = require('iotdb');
 var _ = iotdb._;
 var bunyan = iotdb.bunyan;
 var unirest = iotdb.unirest;
@@ -38,7 +38,7 @@ var logger = bunyan.createLogger({
 /**
  *  EXEMPLAR and INSTANCE
  *  <p>
- *  No subclassing needed! The following functions are 
+ *  No subclassing needed! The following functions are
  *  injected _after_ this is created, and before .discover and .connect
  *  <ul>
  *  <li><code>discovered</code> - tell IOTDB that we're talking to a new Thing
@@ -47,7 +47,7 @@ var logger = bunyan.createLogger({
  *  <li><code>disconnnected</code> - this has been disconnected from a Thing
  *  </ul>
  */
-var FeedBridge = function(initd, native) {
+var FeedBridge = function (initd, native) {
     var self = this;
 
     self.initd = _.defaults(initd, {
@@ -70,7 +70,7 @@ var FeedBridge = function(initd, native) {
 /* --- lifecycle --- */
 
 /**
- *  EXEMPLAR. 
+ *  EXEMPLAR.
  *  Discover WeMo Socket
  *  <ul>
  *  <li>look for Things (using <code>self.bridge</code> data to initialize)
@@ -78,7 +78,7 @@ var FeedBridge = function(initd, native) {
  *  <li>create an FeedBridge(native)
  *  <li>call <code>self.discovered(bridge)</code> with it
  */
-FeedBridge.prototype.discover = function() {
+FeedBridge.prototype.discover = function () {
     var self = this;
 
     if (!self.initd.feed) {
@@ -96,7 +96,7 @@ FeedBridge.prototype.discover = function() {
  *  INSTANCE
  *  This is called when the Bridge is no longer needed. When
  */
-FeedBridge.prototype.connect = function(connectd) {
+FeedBridge.prototype.connect = function (connectd) {
     var self = this;
     if (!self.native) {
         return;
@@ -108,13 +108,13 @@ FeedBridge.prototype.connect = function(connectd) {
     self.pull();
 };
 
-FeedBridge.prototype._setup_polling = function() {
+FeedBridge.prototype._setup_polling = function () {
     var self = this;
     if (!self.initd.poll) {
         return;
     }
 
-    var timer = setInterval(function() {
+    var timer = setInterval(function () {
         if (!self.native) {
             clearInterval(timer);
             return;
@@ -124,7 +124,7 @@ FeedBridge.prototype._setup_polling = function() {
     }, self.initd.poll * 1000);
 };
 
-FeedBridge.prototype._forget = function() {
+FeedBridge.prototype._forget = function () {
     var self = this;
     if (!self.native) {
         return;
@@ -136,13 +136,13 @@ FeedBridge.prototype._forget = function() {
 
     self.native = null;
     self.pulled();
-}
+};
 
 /**
- *  INSTANCE and EXEMPLAR (during shutdown). 
+ *  INSTANCE and EXEMPLAR (during shutdown).
  *  This is called when the Bridge is no longer needed. When
  */
-FeedBridge.prototype.disconnect = function() {
+FeedBridge.prototype.disconnect = function () {
     var self = this;
     if (!self.native || !self.native) {
         return;
@@ -157,7 +157,7 @@ FeedBridge.prototype.disconnect = function() {
  *  INSTANCE.
  *  Send data to whatever you're taking to.
  */
-FeedBridge.prototype.push = function(pushd) {
+FeedBridge.prototype.push = function (pushd) {
     var self = this;
     if (!self.native) {
         return;
@@ -175,7 +175,7 @@ FeedBridge.prototype.push = function(pushd) {
  *  Pull data from whatever we're talking to. You don't
  *  have to implement this if it doesn't make sense
  */
-FeedBridge.prototype.pull = function() {
+FeedBridge.prototype.pull = function () {
     var self = this;
     if (!self.native) {
         return;
@@ -200,7 +200,7 @@ FeedBridge.prototype.pull = function() {
  *  <li><code>schema:manufacturer</code>
  *  <li><code>schema:model</code>
  */
-FeedBridge.prototype.meta = function() {
+FeedBridge.prototype.meta = function () {
     var self = this;
     if (!self.native) {
         return;
@@ -214,29 +214,28 @@ FeedBridge.prototype.meta = function() {
 
 /**
  *  INSTANCE.
- *  Return True if this is reachable. You 
+ *  Return True if this is reachable. You
  *  do not need to worry about connect / disconnect /
  *  shutdown states, they will be always checked first.
  */
-FeedBridge.prototype.reachable = function() {
+FeedBridge.prototype.reachable = function () {
     return this.native !== null;
 };
 
 /**
  *  INSTANCE.
  *  Configure an express web page to configure this Bridge.
- *  Return the name of the Bridge, which may be 
+ *  Return the name of the Bridge, which may be
  *  listed and displayed to the user.
  */
-FeedBridge.prototype.configure = function(app) {
-};
+FeedBridge.prototype.configure = function (app) {};
 
 /* --- injected: THIS CODE WILL BE REMOVED AT RUNTIME, DO NOT MODIFY  --- */
-FeedBridge.prototype.discovered = function(bridge) {
+FeedBridge.prototype.discovered = function (bridge) {
     throw new Error("FeedBridge.discovered not implemented");
 };
 
-FeedBridge.prototype.pulled = function(pulld) {
+FeedBridge.prototype.pulled = function (pulld) {
     throw new Error("FeedBridge.pulled not implemented");
 };
 
@@ -302,7 +301,7 @@ FeedBridge.prototype._process = function (body) {
                     continue;
                 }
             } else {
-                item.is_fresh = ( date.getTime() >= self.started.getTime() ) ? true : false;
+                item.is_fresh = (date.getTime() >= self.started.getTime()) ? true : false;
                 if (self.initd.fresh && !item.is_fresh) {
                     continue;
                 }
@@ -312,7 +311,7 @@ FeedBridge.prototype._process = function (body) {
                 var paramd = {
                     rawd: self._flatten(item),
                     cookd: {},
-                }
+                };
                 self.connectd.data_in(paramd);
                 self.pulled(paramd.cookd);
             } else {

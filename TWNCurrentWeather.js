@@ -8,7 +8,7 @@
 
 "use strict";
 
-var iotdb = require("iotdb")
+var iotdb = require("iotdb");
 
 exports.Model = iotdb.make_model('TWNCurrentWeather')
     .i("temperature", iotdb.sensor.number.temperature.celsius)
@@ -20,27 +20,27 @@ exports.binding = {
     model: exports.Model,
     bridge: require('./FeedBridge').Bridge,
     connectd: {
-        data_in: function(paramd) {
+        data_in: function (paramd) {
             if (paramd.rawd.title !== "Current Weather") {
-                return
+                return;
             }
 
-            var description = paramd.rawd.description
+            var description = paramd.rawd.description;
             if (description !== undefined) {
                 // 'A few clouds,\r\n\t\t11&nbsp;&deg;C\t\t, Humidity\t\t43%\t\t, Wind\t\tSW 9km/h'
-                var match = description.match(/^(.*?),/)
+                var match = description.match(/^(.*?),/);
                 if (match) {
-                    paramd.cookd.conditions = match[1]
+                    paramd.cookd.conditions = match[1];
                 }
 
-                var match = description.match(/([-]?[\d.]+)&nbsp;&deg;C/)
+                match = description.match(/([-]?[\d.]+)&nbsp;&deg;C/);
                 if (match) {
-                    paramd.cookd.temperature = match[1]
+                    paramd.cookd.temperature = match[1];
                 }
 
-                var match = description.match(/Humidity\t\t(\d+)%\t\t/)
+                match = description.match(/Humidity\t\t(\d+)%\t\t/);
                 if (match) {
-                    paramd.cookd.humidity = match[1]
+                    paramd.cookd.humidity = match[1];
                 }
             }
         },

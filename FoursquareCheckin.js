@@ -8,10 +8,12 @@
 
 "use strict";
 
-var iotdb = require("iotdb")
+var iotdb = require("iotdb");
 
 exports.Model = iotdb.make_model('FoursquareCheckin')
-    .i("where", iotdb.string.iri, { "iot:purpose": "wikipedia:check-in" })
+    .i("where", iotdb.string.iri, {
+        "iot:purpose": "wikipedia:check-in"
+    })
     .i("name", iotdb.string)
     .i("timestamp", iotdb.datetime.timestamp)
     .i("latitude", iotdb.vector.number.ll.latitude)
@@ -23,7 +25,7 @@ exports.binding = {
     model: exports.Model,
     bridge: require('./FeedBridge').Bridge,
     connectd: {
-        data_in: function(paramd) {
+        data_in: function (paramd) {
             if (paramd.rawd.link !== undefined) {
                 paramd.cookd.where = paramd.rawd.link;
             }
@@ -43,7 +45,7 @@ exports.binding = {
             var p = paramd.rawd.georss_point;
             if (p) {
                 var parts = p.split(' ');
-                if (parts.length == 2) {
+                if (parts.length === 2) {
                     paramd.cookd.latitude = parseFloat(parts[0]);
                     paramd.cookd.longitude = parseFloat(parts[1]);
                 }
