@@ -5,12 +5,12 @@
  */
 
 try {
-    var model = require('homestar-feed')
+    var model = require('iotdb-feed')
 } catch (x) {
     var model = require('../index')
 }
 
-var _ = model.homestar._;
+var _ = model.iotdb._;
 
 wrapper = model.wrap("FoursquareCheckin", {
     feed: process.argv[2]

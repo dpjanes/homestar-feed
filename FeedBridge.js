@@ -22,10 +22,10 @@
 
 "use strict";
 
-var homestar = require('homestar')
-var _ = homestar._;
-var bunyan = homestar.bunyan;
-var unirest = homestar.unirest;
+var iotdb = require('iotdb')
+var _ = iotdb._;
+var bunyan = iotdb.bunyan;
+var unirest = iotdb.unirest;
 
 var stream = require('stream');
 var FeedParser = require('feedparser');

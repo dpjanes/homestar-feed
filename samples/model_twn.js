@@ -1,10 +1,10 @@
 try {
-    var model = require('homestar-feed')
+    var model = require('iotdb-feed')
 } catch (x) {
     var model = require('../index')
 }
 
-var _ = model.homestar._;
+var _ = model.iotdb._;
 
 wrapper = model.wrap("TWNCurrentWeather", {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"

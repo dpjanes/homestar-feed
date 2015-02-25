@@ -11,24 +11,24 @@
 
 "use strict";
 
-var homestar = require("homestar")
+var iotdb = require("iotdb")
 
-exports.Model = homestar.make_model('USGSEarthquake')
-    .i("name", homestar.string)
-    .i("address", homestar.string.iri, { "iot:purpose": "schema:address" })
-    .i("timestamp", homestar.datetime.timestamp)
-    .i("latitude", homestar.vector.number.lle.latitude)
-    .i("longitude", homestar.vector.number.lle.longitude)
-    .i("elevation", homestar.vector.number.lle.elevation, { "iot:unit": "iot-unit:length.si.metre" })
-    .i("fresh", homestar.boolean.flag)
-    .i("magnitude", homestar.number, { "iot:unit": "iot-unit:energy.magnitude.richter" })
+exports.Model = iotdb.make_model('USGSEarthquake')
+    .i("name", iotdb.string)
+    .i("address", iotdb.string.iri, { "iot:purpose": "schema:address" })
+    .i("timestamp", iotdb.datetime.timestamp)
+    .i("latitude", iotdb.vector.number.lle.latitude)
+    .i("longitude", iotdb.vector.number.lle.longitude)
+    .i("elevation", iotdb.vector.number.lle.elevation, { "iot:unit": "iot-unit:length.si.metre" })
+    .i("fresh", iotdb.boolean.flag)
+    .i("magnitude", iotdb.number, { "iot:unit": "iot-unit:energy.magnitude.richter" })
     .make();
 
 exports.binding = {
     model: exports.Model,
     bridge: require('./FeedBridge').Bridge,
     initd: {
-        iri: 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom'
+        feed: 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom'
     },
     connectd: {
         data_in: function(paramd) {

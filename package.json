@@ -5,7 +5,7 @@
     }, 
     "dependencies": {
         "feedparser": "~0.19.2", 
-        "homestar": ">=0.0.46"
+        "iotdb": ">=0.0.46"
     }, 
     "description": "HomeStar / IOTDB Bridge for RSS / Atom Feeds", 
     "homepage": "https://homestar.io", 
