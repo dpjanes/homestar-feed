@@ -4,8 +4,9 @@
         "url": "https://github.com/dpjanes/homestar-feed/issues"
     }, 
     "dependencies": {
-        "feedparser": "~0.19.2", 
-        "iotdb": ">=0.4.16"
+        "feedparser": "~1.0.0", 
+        "iotdb": ">=0.5.2", 
+        "unirest": "~0.4.0"
     }, 
     "description": "HomeStar / IOTDB Bridge for RSS / Atom Feeds", 
     "devDependencies": {

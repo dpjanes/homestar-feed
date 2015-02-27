@@ -25,8 +25,8 @@
 var iotdb = require('iotdb');
 var _ = iotdb._;
 var bunyan = iotdb.bunyan;
-var unirest = iotdb.unirest;
 
+var unirest = require('unirest');
 var stream = require('stream');
 var FeedParser = require('feedparser');
 
@@ -50,13 +50,16 @@ var logger = bunyan.createLogger({
 var FeedBridge = function (initd, native) {
     var self = this;
 
-    self.initd = _.defaults(initd, {
-        poll: 120,
-        feed: null,
-        fresh: false,
-        track_links: true,
-        name: null,
-    });
+    self.initd = _.defaults(initd,
+        iotdb.keystore().get("bridges/FeedBridge/initd"),
+        {
+            poll: 120,
+            feed: null,
+            fresh: false,
+            track_links: true,
+            name: null,
+        }
+    );
 
     self.native = native;
 
