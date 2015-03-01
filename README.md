@@ -12,7 +12,7 @@ for use in IOTDB / HomeStar projects.
 Get earthquakes as they happen (more or less)
 
 	$ npm install -g homestar ## with 'sudo' if error
-	$ npm install iotdb
+	$ homestar setup
 	$ homestar install homestar-feed
 	$ node
 	>>> iotdb = require('iotdb')
