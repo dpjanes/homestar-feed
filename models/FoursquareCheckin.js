@@ -23,7 +23,7 @@ exports.Model = iotdb.make_model('FoursquareCheckin')
 
 exports.binding = {
     model: exports.Model,
-    bridge: require('./FeedBridge').Bridge,
+    bridge: require('../FeedBridge').Bridge,
     connectd: {
         data_in: function (paramd) {
             if (paramd.rawd.link !== undefined) {

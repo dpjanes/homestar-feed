@@ -32,7 +32,7 @@ exports.Model = iotdb.make_model('USGSEarthquake')
 
 exports.binding = {
     model: exports.Model,
-    bridge: require('./FeedBridge').Bridge,
+    bridge: require('../FeedBridge').Bridge,
     initd: {
         feed: 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom'
     },

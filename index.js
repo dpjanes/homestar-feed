@@ -24,9 +24,9 @@
 
 exports.Bridge = require('./FeedBridge').Bridge;
 exports.bindings = [
-    require('./FoursquareCheckin').binding,
-    require('./TWNCurrentWeather').binding,
-    require('./USGSEarthquake').binding,
+    require('./models/FoursquareCheckin').binding,
+    require('./models/TWNCurrentWeather').binding,
+    require('./models/USGSEarthquake').binding,
 ];
 
 exports.iotdb = require("iotdb");

@@ -198,7 +198,7 @@ FeedBridge.prototype.pull = function () {
  *  <ul>
  *  <li><code>iot:thing</code> required - a unique ID
  *  <li><code>iot:device</code> suggested if linking multiple things together
- *  <li><code>iot:name</code>
+ *  <li><code>schema:name</code>
  *  <li><code>iot:number</code>
  *  <li><code>schema:manufacturer</code>
  *  <li><code>schema:model</code>
@@ -211,7 +211,7 @@ FeedBridge.prototype.meta = function () {
 
     return {
         "iot:thing": _.id.thing_urn.unique_hash("Feed", self.initd.feed),
-        "iot:name": self.initd.name || self.native.name || "Feed",
+        "schema:name": self.initd.name || self.native.name || "Feed",
     };
 };
 
