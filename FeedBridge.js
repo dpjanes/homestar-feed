@@ -64,8 +64,9 @@ var FeedBridge = function (initd, native) {
     self.native = native;
 
     if (self.native) {
-        self.seend = {};
-        self.started = new Date();
+        self._reachable = true;
+        self._seend = {};
+        self._started = new Date();
         self.connectd = {};
     }
 };
@@ -222,7 +223,7 @@ FeedBridge.prototype.meta = function () {
  *  shutdown states, they will be always checked first.
  */
 FeedBridge.prototype.reachable = function () {
-    return this.native !== null;
+    return (this.native !== null) && this._reachable;
 };
 
 /**
@@ -277,7 +278,12 @@ FeedBridge.prototype._process = function (body) {
     var fp = new FeedParser({
         feedurl: self.initd.feed
     });
-    fp.on('error', function () {});
+    fp.on('error', function () {
+        // errors are OK if we've pulled data already 
+        if (_.isEmpty(self._seend)) {
+            self._set_reachable(false);
+        }
+    });
     fp.on('readable', function () {
         var stream = this;
         var item = null;
@@ -286,6 +292,8 @@ FeedBridge.prototype._process = function (body) {
                 continue;
             }
 
+            self._set_reachable(true);
+
             // metadata
             if (item.meta.title !== self.initd.name) {
                 self.initd.name = item.meta.title;
@@ -293,10 +301,10 @@ FeedBridge.prototype._process = function (body) {
             }
 
             // ...
-            if (self.seend[item.guid] && self.initd.track_links) {
+            if (self._seend[item.guid] && self.initd.track_links) {
                 continue;
             }
-            self.seend[item.guid] = 1;
+            self._seend[item.guid] = 1;
 
             var date = item.date;
             if (!date) {
@@ -304,7 +312,7 @@ FeedBridge.prototype._process = function (body) {
                     continue;
                 }
             } else {
-                item.is_fresh = (date.getTime() >= self.started.getTime()) ? true : false;
+                item.is_fresh = (date.getTime() >= self._started.getTime()) ? true : false;
                 if (self.initd.fresh && !item.is_fresh) {
                     continue;
                 }
@@ -371,6 +379,17 @@ FeedBridge.prototype._flatten = function (od) {
     }
 
     return nd;
+};
+
+FeedBridge.prototype._set_reachable = function (reachable) {
+    var self = this;
+
+    if (reachable === self._reachable) {
+        return;
+    }
+
+    self._reachable = reachable;
+    self.pulled();
 };
 
 /*
