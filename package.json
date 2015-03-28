@@ -25,7 +25,7 @@
     "main": "index.js", 
     "name": "homestar-feed", 
     "peerDependencies": {
-        "iotdb": ">=0.5.3"
+        "iotdb": ">=0.5.8"
     }, 
     "private": false, 
     "repository": {
@@ -35,5 +35,5 @@
     "scripts": {
         "test": "grunt"
     }, 
-    "version": "0.0.2"
+    "version": "0.0.4"
 }
