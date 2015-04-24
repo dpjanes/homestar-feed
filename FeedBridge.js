@@ -280,7 +280,7 @@ FeedBridge.prototype._process = function (body) {
     });
     fp.on('error', function () {
         // errors are OK if we've pulled data already 
-        if (_.isEmpty(self._seend)) {
+        if (_.is.Empty(self._seend)) {
             self._set_reachable(false);
         }
     });
@@ -343,18 +343,18 @@ FeedBridge.prototype._flatten = function (od) {
         var ovalue = od[okey];
         var nkey = okey.toLowerCase().replace(/[^a-z0-9]/g, '_');
 
-        if (_.isString(ovalue)) {
+        if (_.is.String(ovalue)) {
             if (ovalue.length !== 0) {
                 nd[nkey] = ovalue;
             }
-        } else if (_.isArray(ovalue)) {
+        } else if (_.is.Array(ovalue)) {
             if (ovalue.length !== 0) {
                 nd[nkey] = ovalue;
             }
-        } else if (_.isDate(ovalue)) {
+        } else if (_.is.Date(ovalue)) {
             nd[nkey] = ovalue;
-        } else if (_.isObject(ovalue)) {
-            if (_.isEmpty(ovalue)) {
+        } else if (_.is.Object(ovalue)) {
+            if (_.is.Empty(ovalue)) {
                 continue;
             }
 
