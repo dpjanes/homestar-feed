@@ -45,8 +45,7 @@ var FeedBridge = function (initd, native) {
     var self = this;
 
     self.initd = _.defaults(initd,
-        iotdb.keystore().get("bridges/FeedBridge/initd"),
-        {
+        iotdb.keystore().get("bridges/FeedBridge/initd"), {
             poll: 120,
             feed: null,
             fresh: false,
@@ -203,11 +202,6 @@ FeedBridge.prototype.meta = function () {
 FeedBridge.prototype.reachable = function () {
     return (this.native !== null) && this._reachable;
 };
-
-/**
- *  See {iotdb.bridge.Bridge#configure} for documentation.
- */
-FeedBridge.prototype.configure = function (app) {};
 
 /* --- Internals --- */
 FeedBridge.prototype._fetch = function () {

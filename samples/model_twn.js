@@ -1,24 +1,25 @@
+"use strict";
+
 try {
-    var model = require('iotdb-feed')
+    var model = require('iotdb-feed');
 } catch (x) {
-    var model = require('../index')
+    var model = require('../index');
 }
 
 var _ = model.iotdb._;
 
-wrapper = model.wrap("TWNCurrentWeather", {
+var wrapper = model.wrap("TWNCurrentWeather", {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"
 });
-wrapper.on('thing', function(model) {
-    model.on("state", function(model) {
-        console.log("+ state\n ", model.thing_id(), model.state());
+wrapper.on('thing', function (model) {
+    model.on('state', function (model) {
+        console.log("+ state\n ", model.thing_id(), model.state("istate"));
     });
-    model.on("meta", function(model) {
-        console.log("+ meta\n ", model.thing_id(), _.ld.compact(model.meta().state()));
+    model.on('meta', function (model) {
+        console.log("+ meta\n ", model.thing_id(), model.state("meta"));
     });
-    
-    console.log("+ discovered\n ", _.ld.compact(model.meta().state()), "\n ", model.thing_id());
-})
-wrapper.on('ignored', function(bridge) {
+    console.log("+ discovered\n ", model.thing_id(), model.state("meta"));
+});
+wrapper.on('ignored', function (bridge) {
     console.log("+ ignored\n ", _.ld.compact(bridge.meta()));
 });
