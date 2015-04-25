@@ -61,7 +61,6 @@ var FeedBridge = function (initd, native) {
         self._reachable = true;
         self._seend = {};
         self._started = new Date();
-        self.connectd = {};
     }
 };
 
@@ -99,7 +98,9 @@ FeedBridge.prototype.connect = function (connectd) {
         return;
     }
 
-    self.connectd = _.defaults(connectd, {});
+    self._validate_connect(connectd);
+
+    self.connectd = _.defaults(connectd, {}, self.connectd);
 
     self._setup_polling();
     self.pull();
