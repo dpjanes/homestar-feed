@@ -206,15 +206,6 @@ FeedBridge.prototype.reachable = function () {
  */
 FeedBridge.prototype.configure = function (app) {};
 
-/* --- injected: THIS CODE WILL BE REMOVED AT RUNTIME, DO NOT MODIFY  --- */
-FeedBridge.prototype.discovered = function (bridge) {
-    throw new Error("FeedBridge.discovered not implemented");
-};
-
-FeedBridge.prototype.pulled = function (pulld) {
-    throw new Error("FeedBridge.pulled not implemented");
-};
-
 /* --- Internals --- */
 FeedBridge.prototype._fetch = function () {
     var self = this;
