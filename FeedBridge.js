@@ -71,6 +71,12 @@ var FeedBridge = function (initd, native) {
     }
 };
 
+FeedBridge.prototype = new iotdb.Bridge();
+
+FeedBridge.prototype.name = function () {
+    return "FeedBridge";
+};
+
 /* --- lifecycle --- */
 
 /**
