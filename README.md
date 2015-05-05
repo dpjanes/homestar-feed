@@ -3,9 +3,20 @@
 IOTDB HomeStar Atom / RSS Controller. 
 This will convert feeds into structured data.
 
+<img src="https://github.com/dpjanes/iotdb-homestar/blob/master/docs/HomeStar.png" align="right" />
+
 See <a href="samples/">the samples</a> for details how to add to your project.
 particularly <code>model\_\*.js</code> for "standalone" and <code>iotdb\_\*.js</code>
 for use in IOTDB / HomeStar projects.
+
+# Installation
+
+Install Home☆Star first. 
+See: https://github.com/dpjanes/iotdb-homestar#installation
+
+Then
+
+    $ homestar install homestar-template
 
 # Quick Start
 
