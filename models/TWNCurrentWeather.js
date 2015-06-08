@@ -19,6 +19,7 @@ exports.Model = iotdb.make_model('TWNCurrentWeather')
 exports.binding = {
     model: exports.Model,
     bridge: require('../FeedBridge').Bridge,
+    discover: false,
     connectd: {
         data_in: function (paramd) {
             if (paramd.rawd.title !== "Current Weather") {
