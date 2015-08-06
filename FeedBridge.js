@@ -194,7 +194,7 @@ FeedBridge.prototype.meta = function () {
     }
 
     return {
-        "iot:thing": _.id.thing_urn.unique_hash("Feed", self.initd.feed),
+        "iot:thing-id": _.id.thing_urn.unique_hash("Feed", self.initd.feed),
         "schema:name": self.initd.name || self.native.name || "Feed",
     };
 };
