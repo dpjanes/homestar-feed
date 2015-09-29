@@ -287,7 +287,6 @@ FeedBridge.prototype._process = function (body) {
                     cookd: {},
                 };
                 self.connectd.data_in(paramd);
-                console.log("HERE:XXX", paramd.cookd);
                 self.pulled(paramd.cookd);
             } else {
                 self.pulled(self._flatten(item));
