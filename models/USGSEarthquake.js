@@ -44,7 +44,7 @@ exports.binding = {
             }
 
             if (paramd.rawd.date !== undefined) {
-                paramd.cookd.timestamp = paramd.rawd.date;
+                paramd.cookd.timestamp = paramd.rawd.date.toISOString();
             }
 
             if (paramd.rawd.title !== undefined) {
