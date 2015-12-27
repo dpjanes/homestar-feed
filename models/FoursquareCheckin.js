@@ -10,19 +10,8 @@
 
 var iotdb = require("iotdb");
 
-exports.Model = iotdb.make_model('FoursquareCheckin')
-    .i("where", iotdb.string.iri, {
-        "iot:purpose": "wikipedia:check-in"
-    })
-    .i("name", iotdb.string)
-    .i("timestamp", iotdb.datetime.timestamp)
-    .i("latitude", iotdb.vector.number.ll.latitude)
-    .i("longitude", iotdb.vector.number.ll.longitude)
-    .i("fresh", iotdb.boolean.flag)
-    .make();
-
 exports.binding = {
-    model: exports.Model,
+    model: require('./FoursquareCheckin.json'),
     bridge: require('../FeedBridge').Bridge,
     discover: false,
     connectd: {

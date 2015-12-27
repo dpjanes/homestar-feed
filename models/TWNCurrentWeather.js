@@ -8,16 +8,8 @@
 
 "use strict";
 
-var iotdb = require("iotdb");
-
-exports.Model = iotdb.make_model('TWNCurrentWeather')
-    .i("temperature", iotdb.sensor.number.temperature.celsius)
-    .i("humidity", iotdb.sensor.percent.humidity)
-    .i("conditions", iotdb.string)
-    .make();
-
 exports.binding = {
-    model: exports.Model,
+    model: require('./TwnCurrentWeather.json'),
     bridge: require('../FeedBridge').Bridge,
     discover: false,
     connectd: {

@@ -1,0 +1,64 @@
+{
+  "@context": {
+    "@base": "file:///twn-current-weather",
+    "@vocab": "file:///twn-current-weather#",
+    "iot": "https://iotdb.org/pub/iot#",
+    "schema": "http://schema.org/",
+    "iot-purpose": "https://iotdb.org/pub/iot-purpose#",
+    "iot:purpose": {
+      "@id": "https://iotdb.org/pub/iot#purpose",
+      "@type": "@id"
+    },
+    "iot:type": {
+      "@id": "https://iotdb.org/pub/iot#type",
+      "@type": "@id"
+    },
+    "iot-unit": "https://iotdb.org/pub/iot-unit#",
+    "iot:unit": {
+      "@id": "https://iotdb.org/pub/iot#unit",
+      "@type": "@id"
+    }
+  },
+  "@id": "",
+  "@type": "iot:Model",
+  "schema:name": "twn-current-weather",
+  "iot:attribute": [
+    {
+      "@type": "iot:Attribute",
+      "@id": "#temperature",
+      "schema:name": "temperature",
+      "iot:purpose": "iot-purpose:temperature",
+      "iot:type": "iot:type.number",
+      "iot:unit": "iot-unit:temperature.si.celsius",
+      "iot:read": true,
+      "iot:write": false,
+      "iot:sensor": true,
+      "iot:actuator": false
+    },
+    {
+      "@type": "iot:Attribute",
+      "@id": "#humidity",
+      "schema:name": "humidity",
+      "iot:purpose": "iot-purpose:humidity",
+      "iot:type": "iot:type.number",
+      "iot:unit": "iot-unit:math.fraction.percent",
+      "iot:minimum": 0,
+      "iot:maximum": 100,
+      "iot:read": true,
+      "iot:write": false,
+      "iot:sensor": true,
+      "iot:actuator": false
+    },
+    {
+      "@type": "iot:Attribute",
+      "@id": "#conditions",
+      "schema:name": "conditions",
+      "iot:purpose": "iot-purpose:value",
+      "iot:type": "iot:type.string",
+      "iot:read": true,
+      "iot:write": false,
+      "iot:sensor": true,
+      "iot:actuator": false
+    }
+  ]
+}
