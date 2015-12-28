@@ -5,7 +5,7 @@
     }, 
     "dependencies": {
         "feedparser": "~1.1.4", 
-        "iotdb": ">=0.10.0", 
+        "iotdb": ">=0.11.0", 
         "unirest": "~0.4.2"
     }, 
     "description": "HomeStar / IOTDB Bridge for RSS / Atom Feeds", 
@@ -33,5 +33,5 @@
     "scripts": {
         "test": "grunt"
     }, 
-    "version": "0.1.12"
+    "version": "0.1.13"
 }
