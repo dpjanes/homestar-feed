@@ -24,13 +24,12 @@
 
 var iotdb = require('iotdb');
 var _ = iotdb._;
-var bunyan = iotdb.bunyan;
 
 var unirest = require('unirest');
 var stream = require('stream');
 var FeedParser = require('feedparser');
 
-var logger = bunyan.createLogger({
+var logger = iotdb.logger({
     name: 'homestar-feed',
     module: 'FeedBridge',
 });
