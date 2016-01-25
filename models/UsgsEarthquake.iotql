@@ -1,5 +1,6 @@
 CREATE MODEL UsgsEarthquake WITH
-    schema:name = "usgs-earthquake"
+    schema:name = "usgs-earthquake",
+    iot:model = "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/UsgsEarthquake.json"
 ATTRIBUTE name WITH
     schema:name = "name",
     iot:purpose = iot-purpose:name,

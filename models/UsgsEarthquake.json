@@ -26,6 +26,7 @@
   "@id": "",
   "@type": "iot:Model",
   "schema:name": "usgs-earthquake",
+  "iot:model": "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/UsgsEarthquake.json",
   "iot:attribute": [
     {
       "@type": "iot:Attribute",

@@ -1,5 +1,6 @@
 CREATE MODEL FoursquareCheckin WITH
-    schema:name = "foursquare-checkin"
+    schema:name = "foursquare-checkin",
+    iot:model = "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/FoursquareCheckin.json"
 ATTRIBUTE "where" WITH
     schema:name = "where",
     iot:purpose = wikipedia:check-in,

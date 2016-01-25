@@ -22,6 +22,7 @@
   "@id": "",
   "@type": "iot:Model",
   "schema:name": "twn-current-weather",
+  "iot:model": "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/TwnCurrentWeather.json",
   "iot:attribute": [
     {
       "@type": "iot:Attribute",

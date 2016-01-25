@@ -27,6 +27,7 @@
   "@id": "",
   "@type": "iot:Model",
   "schema:name": "foursquare-checkin",
+  "iot:model": "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/FoursquareCheckin.json",
   "iot:attribute": [
     {
       "@type": "iot:Attribute",

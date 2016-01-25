@@ -1,5 +1,6 @@
 CREATE MODEL TwnCurrentWeather WITH
-    schema:name = "twn-current-weather"
+    schema:name = "twn-current-weather",
+    iot:model = "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/TwnCurrentWeather.json"
 ATTRIBUTE temperature WITH
     schema:name = "temperature",
     iot:purpose = iot-purpose:temperature,
