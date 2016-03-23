@@ -11,7 +11,7 @@
 var iotdb = require("iotdb");
 
 exports.binding = {
-    model: require('./FoursquareCheckin.json'),
+    model: require('./foursquare-checkin.json'),
     bridge: require('../FeedBridge').Bridge,
     discover: false,
     connectd: {

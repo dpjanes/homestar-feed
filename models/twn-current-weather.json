@@ -22,7 +22,6 @@
   "@id": "",
   "@type": "iot:Model",
   "schema:name": "twn-current-weather",
-  "iot:model": "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/TwnCurrentWeather.json",
   "iot:attribute": [
     {
       "@type": "iot:Attribute",
@@ -31,9 +30,9 @@
       "iot:purpose": "iot-purpose:temperature",
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:temperature.si.celsius",
+      "iot:sensor": true,
       "iot:read": true,
       "iot:write": false,
-      "iot:sensor": true,
       "iot:actuator": false
     },
     {
@@ -45,9 +44,9 @@
       "iot:unit": "iot-unit:math.fraction.percent",
       "iot:minimum": 0,
       "iot:maximum": 100,
+      "iot:sensor": true,
       "iot:read": true,
       "iot:write": false,
-      "iot:sensor": true,
       "iot:actuator": false
     },
     {
@@ -56,9 +55,9 @@
       "schema:name": "conditions",
       "iot:purpose": "iot-purpose:value",
       "iot:type": "iot:type.string",
+      "iot:sensor": true,
       "iot:read": true,
       "iot:write": false,
-      "iot:sensor": true,
       "iot:actuator": false
     }
   ]

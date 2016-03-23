@@ -12,7 +12,7 @@
 "use strict";
 
 exports.binding = {
-    model: require('./UsgsEarthquake.json'),
+    model: require('./usgs-earthquake.json'),
     bridge: require('../FeedBridge').Bridge,
     discover: false,
     initd: {

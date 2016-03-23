@@ -1,13 +1,12 @@
 CREATE MODEL TwnCurrentWeather WITH
-    schema:name = "twn-current-weather",
-    iot:model = "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/TwnCurrentWeather.json"
+    schema:name = "twn-current-weather"
 ATTRIBUTE temperature WITH
     schema:name = "temperature",
     iot:purpose = iot-purpose:temperature,
     iot:type = iot:type.number,
     iot:unit = iot-unit:temperature.si.celsius,
-    iot:read = true,
-    iot:write = false
+    iot:sensor = true,
+    iot:read = true
 ATTRIBUTE humidity WITH
     schema:name = "humidity",
     iot:purpose = iot-purpose:humidity,
@@ -15,12 +14,12 @@ ATTRIBUTE humidity WITH
     iot:unit = iot-unit:math.fraction.percent,
     iot:minimum = 0,
     iot:maximum = 100,
-    iot:read = true,
-    iot:write = false
+    iot:sensor = true,
+    iot:read = true
 ATTRIBUTE conditions WITH
     schema:name = "conditions",
     iot:purpose = iot-purpose:value,
     iot:type = iot:type.string,
-    iot:read = true,
-    iot:write = false
+    iot:sensor = true,
+    iot:read = true
 ;

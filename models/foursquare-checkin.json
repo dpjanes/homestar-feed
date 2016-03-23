@@ -1,10 +1,11 @@
 {
   "@context": {
-    "@base": "file:///usgs-earthquake",
-    "@vocab": "file:///usgs-earthquake#",
+    "@base": "file:///foursquare-checkin",
+    "@vocab": "file:///foursquare-checkin#",
     "iot": "https://iotdb.org/pub/iot#",
     "schema": "http://schema.org/",
     "iot-purpose": "https://iotdb.org/pub/iot-purpose#",
+    "wikipedia": "https://en.wikipedia.org/wiki/",
     "iot:purpose": {
       "@id": "https://iotdb.org/pub/iot#purpose",
       "@type": "@id"
@@ -25,30 +26,29 @@
   },
   "@id": "",
   "@type": "iot:Model",
-  "schema:name": "usgs-earthquake",
-  "iot:model": "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/UsgsEarthquake.json",
+  "schema:name": "foursquare-checkin",
   "iot:attribute": [
     {
       "@type": "iot:Attribute",
-      "@id": "#name",
-      "schema:name": "name",
-      "iot:purpose": "iot-purpose:name",
+      "@id": "#where",
+      "schema:name": "where",
+      "iot:purpose": "wikipedia:check-in",
       "iot:type": "iot:type.string",
+      "iot:format": "iot:format.iri",
       "iot:read": true,
-      "iot:write": false,
       "iot:sensor": true,
+      "iot:write": false,
       "iot:actuator": false
     },
     {
       "@type": "iot:Attribute",
-      "@id": "#address",
-      "schema:name": "address",
-      "iot:purpose": "iot-purpose:iri",
+      "@id": "#name",
+      "schema:name": "name",
+      "iot:purpose": "iot-purpose:value",
       "iot:type": "iot:type.string",
-      "iot:format": "iot:format.iri",
       "iot:read": true,
-      "iot:write": false,
       "iot:sensor": true,
+      "iot:write": false,
       "iot:actuator": false
     },
     {
@@ -59,8 +59,8 @@
       "iot:type": "iot:type.string",
       "iot:format": "iot:format.datetime",
       "iot:read": true,
-      "iot:write": false,
       "iot:sensor": true,
+      "iot:write": false,
       "iot:actuator": false
     },
     {
@@ -70,12 +70,12 @@
       "iot:purpose": "iot-purpose:latitude",
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:math.angle.degree",
-      "iot:vector": "l/l/e",
+      "iot:vector": "latitude/longitude",
       "iot:minimum": -90,
       "iot:maximum": 90,
       "iot:read": true,
-      "iot:write": false,
       "iot:sensor": true,
+      "iot:write": false,
       "iot:actuator": false
     },
     {
@@ -85,25 +85,12 @@
       "iot:purpose": "iot-purpose:longitude",
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:math.angle.degree",
-      "iot:vector": "l/l/e",
+      "iot:vector": "latitude/longitude",
       "iot:minimum": -180,
       "iot:maximum": 180,
       "iot:read": true,
-      "iot:write": false,
       "iot:sensor": true,
-      "iot:actuator": false
-    },
-    {
-      "@type": "iot:Attribute",
-      "@id": "#elevation",
-      "schema:name": "altitude",
-      "iot:purpose": "iot-purpose:altitude",
-      "iot:vector": "l/l/e",
-      "iot:unit": "iot-unit:length.si.metre",
-      "iot:type": "iot:type.number",
-      "iot:read": true,
       "iot:write": false,
-      "iot:sensor": true,
       "iot:actuator": false
     },
     {
@@ -113,20 +100,8 @@
       "iot:purpose": "iot-purpose:flag",
       "iot:type": "iot:type.boolean",
       "iot:read": true,
-      "iot:write": false,
       "iot:sensor": true,
-      "iot:actuator": false
-    },
-    {
-      "@type": "iot:Attribute",
-      "@id": "#magnitude",
-      "schema:name": "magnitude",
-      "iot:purpose": "iot-purpose:magnitude",
-      "iot:unit": "iot-unit:energy.magnitude.richter",
-      "iot:type": "iot:type.number",
-      "iot:read": true,
       "iot:write": false,
-      "iot:sensor": true,
       "iot:actuator": false
     }
   ]

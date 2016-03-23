@@ -1,26 +1,25 @@
 CREATE MODEL UsgsEarthquake WITH
-    schema:name = "usgs-earthquake",
-    iot:model = "https://raw.githubusercontent.com/dpjanes/homestar-feed/master/models/UsgsEarthquake.json"
+    schema:name = "usgs-earthquake"
 ATTRIBUTE name WITH
     schema:name = "name",
     iot:purpose = iot-purpose:name,
     iot:type = iot:type.string,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE address WITH
     schema:name = "address",
     iot:purpose = iot-purpose:iri,
     iot:type = iot:type.string,
     iot:format = iot:format.iri,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE timestamp WITH
     schema:name = "timestamp",
     iot:purpose = iot-purpose:timestamp,
     iot:type = iot:type.string,
     iot:format = iot:format.datetime,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE latitude WITH
     schema:name = "latitude",
     iot:purpose = iot-purpose:latitude,
@@ -30,7 +29,7 @@ ATTRIBUTE latitude WITH
     iot:minimum = -90,
     iot:maximum = 90,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE longitude WITH
     schema:name = "longitude",
     iot:purpose = iot-purpose:longitude,
@@ -40,7 +39,7 @@ ATTRIBUTE longitude WITH
     iot:minimum = -180,
     iot:maximum = 180,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE elevation WITH
     schema:name = "altitude",
     iot:purpose = iot-purpose:altitude,
@@ -48,18 +47,18 @@ ATTRIBUTE elevation WITH
     iot:unit = iot-unit:length.si.metre,
     iot:type = iot:type.number,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE fresh WITH
     schema:name = "flag",
     iot:purpose = iot-purpose:flag,
     iot:type = iot:type.boolean,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ATTRIBUTE magnitude WITH
     schema:name = "magnitude",
     iot:purpose = iot-purpose:magnitude,
     iot:unit = iot-unit:energy.magnitude.richter,
     iot:type = iot:type.number,
     iot:read = true,
-    iot:write = false
+    iot:sensor = true
 ;

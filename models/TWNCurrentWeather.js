@@ -9,7 +9,7 @@
 "use strict";
 
 exports.binding = {
-    model: require('./TwnCurrentWeather.json'),
+    model: require('./twn-current-weather.json'),
     bridge: require('../FeedBridge').Bridge,
     discover: false,
     connectd: {
