@@ -3,8 +3,10 @@
     "@base": "file:///foursquare-checkin",
     "@vocab": "file:///foursquare-checkin#",
     "iot": "https://iotdb.org/pub/iot#",
-    "schema": "http://schema.org/",
-    "iot-purpose": "https://iotdb.org/pub/iot-purpose#",
+    "iot:format": {
+      "@id": "https://iotdb.org/pub/iot#format",
+      "@type": "@id"
+    },
     "wikipedia": "https://en.wikipedia.org/wiki/",
     "iot:purpose": {
       "@id": "https://iotdb.org/pub/iot#purpose",
@@ -14,10 +16,8 @@
       "@id": "https://iotdb.org/pub/iot#type",
       "@type": "@id"
     },
-    "iot:format": {
-      "@id": "https://iotdb.org/pub/iot#format",
-      "@type": "@id"
-    },
+    "schema": "http://schema.org/",
+    "iot-purpose": "https://iotdb.org/pub/iot-purpose#",
     "iot-unit": "https://iotdb.org/pub/iot-unit#",
     "iot:unit": {
       "@id": "https://iotdb.org/pub/iot#unit",
@@ -26,83 +26,84 @@
   },
   "@id": "",
   "@type": "iot:Model",
-  "schema:name": "foursquare-checkin",
   "iot:attribute": [
     {
-      "@type": "iot:Attribute",
       "@id": "#where",
-      "schema:name": "where",
-      "iot:purpose": "wikipedia:check-in",
-      "iot:type": "iot:type.string",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
       "iot:format": "iot:format.iri",
+      "iot:purpose": "wikipedia:check-in",
       "iot:read": true,
       "iot:sensor": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:type": "iot:type.string",
+      "iot:write": true,
+      "schema:name": "where"
     },
     {
-      "@type": "iot:Attribute",
       "@id": "#name",
-      "schema:name": "name",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
       "iot:purpose": "iot-purpose:value",
-      "iot:type": "iot:type.string",
       "iot:read": true,
       "iot:sensor": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:type": "iot:type.string",
+      "iot:write": true,
+      "schema:name": "name"
     },
     {
-      "@type": "iot:Attribute",
       "@id": "#timestamp",
-      "schema:name": "timestamp",
-      "iot:purpose": "iot-purpose:timestamp",
-      "iot:type": "iot:type.string",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
       "iot:format": "iot:format.datetime",
+      "iot:purpose": "iot-purpose:timestamp",
       "iot:read": true,
       "iot:sensor": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:type": "iot:type.string",
+      "iot:write": true,
+      "schema:name": "timestamp"
     },
     {
-      "@type": "iot:Attribute",
       "@id": "#latitude",
-      "schema:name": "latitude",
-      "iot:purpose": "iot-purpose:latitude",
-      "iot:type": "iot:type.number",
-      "iot:unit": "iot-unit:math.angle.degree",
-      "iot:vector": "latitude/longitude",
-      "iot:minimum": -90,
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
       "iot:maximum": 90,
+      "iot:minimum": -90,
+      "iot:purpose": "iot-purpose:latitude",
       "iot:read": true,
       "iot:sensor": true,
-      "iot:write": false,
-      "iot:actuator": false
-    },
-    {
-      "@type": "iot:Attribute",
-      "@id": "#longitude",
-      "schema:name": "longitude",
-      "iot:purpose": "iot-purpose:longitude",
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:math.angle.degree",
       "iot:vector": "latitude/longitude",
-      "iot:minimum": -180,
-      "iot:maximum": 180,
-      "iot:read": true,
-      "iot:sensor": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:write": true,
+      "schema:name": "latitude"
     },
     {
+      "@id": "#longitude",
       "@type": "iot:Attribute",
-      "@id": "#fresh",
-      "schema:name": "flag",
-      "iot:purpose": "iot-purpose:flag",
-      "iot:type": "iot:type.boolean",
+      "iot:actuator": true,
+      "iot:maximum": 180,
+      "iot:minimum": -180,
+      "iot:purpose": "iot-purpose:longitude",
       "iot:read": true,
       "iot:sensor": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:type": "iot:type.number",
+      "iot:unit": "iot-unit:math.angle.degree",
+      "iot:vector": "latitude/longitude",
+      "iot:write": true,
+      "schema:name": "longitude"
+    },
+    {
+      "@id": "#fresh",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:purpose": "iot-purpose:flag",
+      "iot:read": true,
+      "iot:sensor": true,
+      "iot:type": "iot:type.boolean",
+      "iot:write": true,
+      "schema:name": "flag"
     }
-  ]
+  ],
+  "iot:model-id": "foursquare-checkin",
+  "schema:name": "foursquare-checkin"
 }

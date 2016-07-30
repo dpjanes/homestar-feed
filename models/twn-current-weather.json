@@ -3,7 +3,6 @@
     "@base": "file:///twn-current-weather",
     "@vocab": "file:///twn-current-weather#",
     "iot": "https://iotdb.org/pub/iot#",
-    "schema": "http://schema.org/",
     "iot-purpose": "https://iotdb.org/pub/iot-purpose#",
     "iot:purpose": {
       "@id": "https://iotdb.org/pub/iot#purpose",
@@ -17,48 +16,50 @@
     "iot:unit": {
       "@id": "https://iotdb.org/pub/iot#unit",
       "@type": "@id"
-    }
+    },
+    "schema": "http://schema.org/"
   },
   "@id": "",
   "@type": "iot:Model",
-  "schema:name": "twn-current-weather",
   "iot:attribute": [
     {
-      "@type": "iot:Attribute",
       "@id": "#temperature",
-      "schema:name": "temperature",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
       "iot:purpose": "iot-purpose:temperature",
+      "iot:read": true,
+      "iot:sensor": true,
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:temperature.si.celsius",
-      "iot:sensor": true,
-      "iot:read": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:write": true,
+      "schema:name": "temperature"
     },
     {
-      "@type": "iot:Attribute",
       "@id": "#humidity",
-      "schema:name": "humidity",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:maximum": 100,
+      "iot:minimum": 0,
       "iot:purpose": "iot-purpose:humidity",
+      "iot:read": true,
+      "iot:sensor": true,
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:math.fraction.percent",
-      "iot:minimum": 0,
-      "iot:maximum": 100,
-      "iot:sensor": true,
-      "iot:read": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:write": true,
+      "schema:name": "humidity"
     },
     {
-      "@type": "iot:Attribute",
       "@id": "#conditions",
-      "schema:name": "conditions",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
       "iot:purpose": "iot-purpose:value",
-      "iot:type": "iot:type.string",
-      "iot:sensor": true,
       "iot:read": true,
-      "iot:write": false,
-      "iot:actuator": false
+      "iot:sensor": true,
+      "iot:type": "iot:type.string",
+      "iot:write": true,
+      "schema:name": "conditions"
     }
-  ]
+  ],
+  "iot:model-id": "twn-current-weather",
+  "schema:name": "twn-current-weather"
 }

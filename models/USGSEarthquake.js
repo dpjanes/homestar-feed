@@ -33,7 +33,7 @@ exports.binding = {
 
                 var match = paramd.rawd.title.match(/^M ([0-9][^ ]*)/);
                 if (match) {
-                    paramd.cookd.magnitude = match[1];
+                    paramd.cookd.magnitude = parseFloat(match[1]);
                 }
 
                 match = paramd.rawd.title.match(/^.*? of (.*)$/);
