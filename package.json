@@ -8,7 +8,7 @@
         "iotdb": ">=3.0.0", 
         "unirest": "~0.5.1"
     }, 
-    "description": "HomeStar / IOTDB Bridge for RSS / Atom Feeds", 
+    "description": "IOTDB Bridge for RSS / Atom Feeds", 
     "devDependencies": {
         "grunt": "~1.0.1", 
         "grunt-contrib-jshint": "~1.0.0", 
