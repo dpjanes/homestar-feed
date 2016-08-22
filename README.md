@@ -1,6 +1,5 @@
 # homestar-feed
-
-IOTDB HomeStar Atom / RSS Controller. 
+[IOTDB](https://github.com/dpjanes/node-iotdb) Bridge for Atom / RSS feeds. 
 This will convert feeds into structured data.
 
 <img src="https://raw.githubusercontent.com/dpjanes/iotdb-homestar/master/docs/HomeStar.png" align="right" />
@@ -25,12 +24,12 @@ Get earthquakes as they happen (more or less)
 	$ npm install -g homestar ## with 'sudo' if error
 	$ homestar setup
 	$ homestar install homestar-feed
-	$ node
-	>>> iotdb = require('iotdb')
-	>>> iot = iotdb.iot()
-	>>> things = iot.connect("USGSEarthquake")
-	>>> things.on("state", function(thing) {
-        console.log(thing.state());
+
+	const iotdb = require('iotdb')
+	const things = iot.connect("USGSEarthquake")
+
+	things.on("istate", function(thing) {
+        console.log(thing.state("istate"));
     });
 
 ## FoursquareCheckin

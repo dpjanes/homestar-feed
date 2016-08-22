@@ -6,12 +6,13 @@
 
 "use strict";
 
-var iotdb = require('iotdb');
-var _ = iotdb._;
-var iot = iotdb.iot();
+const iotdb = require('iotdb');
+const _ = iotdb._;
 
-var things = iot.connect('USGSEarthquake');
-things.on('state', function (thing) {
+iotdb.use("homestar-feed");
+
+const things = iotdb.connect('USGSEarthquake');
+things.on('istate', function (thing) {
     console.log("+ state\n ", thing.thing_id(), "\n ", thing.state("istate"));
 });
 things.on("meta", function (thing) {

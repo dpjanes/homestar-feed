@@ -6,14 +6,15 @@
 
 "use strict";
 
-var iotdb = require('iotdb');
-var _ = iotdb._;
-var iot = iotdb.iot();
+const iotdb = require('iotdb');
+const _ = iotdb._;
 
-var things = iot.connect("TWNCurrentWeather", {
+iotdb.use("homestar-feed");
+
+const things = iotdb.connect("TWNCurrentWeather", {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"
 });
-things.on('state', function (thing) {
+things.on('istate', function (thing) {
     console.log("+ state\n ", thing.thing_id(), "\n ", thing.state("istate"));
 });
 things.on("meta", function (thing) {
