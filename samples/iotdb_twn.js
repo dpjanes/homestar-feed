@@ -15,7 +15,7 @@ const things = iotdb.connect("TWNCurrentWeather", {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"
 });
 things.on('istate', function (thing) {
-    console.log("+ state\n ", thing.thing_id(), "\n ", thing.state("istate"));
+    console.log("+", "istate\n ", thing.thing_id(), "\n ", thing.state("istate"));
 });
 things.on("meta", function (thing) {
     console.log("+ meta\n ", thing.thing_id(), thing.state("meta"));

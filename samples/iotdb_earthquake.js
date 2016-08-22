@@ -13,7 +13,7 @@ iotdb.use("homestar-feed");
 
 const things = iotdb.connect('USGSEarthquake');
 things.on('istate', function (thing) {
-    console.log("+ state\n ", thing.thing_id(), "\n ", thing.state("istate"));
+    console.log("+", "istate\n ", thing.thing_id(), "\n ", thing.state("istate"));
 });
 things.on("meta", function (thing) {
     console.log("+ meta\n ", thing.thing_id(), thing.state("meta"));
