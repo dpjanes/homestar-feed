@@ -1,14 +1,11 @@
 "use strict";
 
-try {
-    var model = require('iotdb-feed');
-} catch (x) {
-    var model = require('../index');
-}
+const iotdb = require("iotdb")
+const _ = iotdb._;
 
-var _ = model.iotdb._;
+const module = require('homestar-feed');
 
-var wrapper = model.wrap("TWNCurrentWeather", {
+const wrapper = _.bridge.wrap("TWNCurrentWeather", module.bindings, {
     feed: "http://rss.theweathernetwork.com/weather/caon0696"
 });
 wrapper.on('thing', function (model) {

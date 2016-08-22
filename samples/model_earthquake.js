@@ -1,14 +1,11 @@
 "use strict";
 
-try {
-    var model = require('iotdb-feed');
-} catch (x) {
-    var model = require('../index');
-}
+const iotdb = require("iotdb")
+const _ = iotdb._;
 
-var _ = model.iotdb._;
+const module = require("homestar-feed");
 
-var wrapper = model.wrap("USGSEarthquake");
+const wrapper = _.bridge.wrap("USGSEarthquake", module.bindings);
 wrapper.on('thing', function (model) {
     model.on('state', function (model) {
         console.log("+ state\n ", model.thing_id(), model.state("istate"));

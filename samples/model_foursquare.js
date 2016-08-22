@@ -6,15 +6,12 @@
 
 "use strict";
 
-try {
-    var model = require('iotdb-feed');
-} catch (x) {
-    var model = require('../index');
-}
+const iotdb = require("iotdb")
+const _ = iotdb._;
 
-var _ = model.iotdb._;
+const module = require('homestar-ble');
 
-var wrapper = model.wrap("FoursquareCheckin", {
+const wrapper = _.bridge.wrap("TIKeyFob", module.bindings, {
     feed: process.argv[2]
 });
 wrapper.on('thing', function (model) {
