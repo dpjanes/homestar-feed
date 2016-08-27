@@ -25,19 +25,19 @@
     {
       "@id": "#temperature",
       "@type": "iot:Attribute",
-      "iot:actuator": true,
+      "iot:actuator": false,
       "iot:purpose": "iot-purpose:temperature",
       "iot:read": true,
       "iot:sensor": true,
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:temperature.si.celsius",
-      "iot:write": true,
+      "iot:write": false,
       "schema:name": "temperature"
     },
     {
       "@id": "#humidity",
       "@type": "iot:Attribute",
-      "iot:actuator": true,
+      "iot:actuator": false,
       "iot:maximum": 100,
       "iot:minimum": 0,
       "iot:purpose": "iot-purpose:humidity",
@@ -45,18 +45,18 @@
       "iot:sensor": true,
       "iot:type": "iot:type.number",
       "iot:unit": "iot-unit:math.fraction.percent",
-      "iot:write": true,
+      "iot:write": false,
       "schema:name": "humidity"
     },
     {
       "@id": "#conditions",
       "@type": "iot:Attribute",
-      "iot:actuator": true,
+      "iot:actuator": false,
       "iot:purpose": "iot-purpose:value",
       "iot:read": true,
       "iot:sensor": true,
       "iot:type": "iot:type.string",
-      "iot:write": true,
+      "iot:write": false,
       "schema:name": "conditions"
     }
   ],
