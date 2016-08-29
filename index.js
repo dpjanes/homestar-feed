@@ -28,3 +28,5 @@ exports.bindings = [
     require('./models/TWNCurrentWeather').binding,
     require('./models/USGSEarthquake').binding,
 ];
+
+exports.module_folder = __dirname;
