@@ -4,23 +4,23 @@
         "url": "https://github.com/dpjanes/homestar-feed/issues"
     }, 
     "dependencies": {
-        "feedparser": "~1.1.4", 
+        "feedparser": "~2.0.0", 
         "iotdb": ">=3.0.0", 
         "unirest": "~0.5.1"
     }, 
     "description": "IOTDB Bridge for RSS / Atom Feeds", 
     "devDependencies": {
         "grunt": "~1.0.1", 
-        "grunt-contrib-jshint": "~1.0.0", 
+        "grunt-contrib-jshint": "~1.1.0", 
         "grunt-contrib-nodeunit": "~1.0.0", 
         "grunt-contrib-uglify": "~2.0.0", 
         "grunt-contrib-watch": "~1.0.0", 
         "grunt-jsbeautifier": "~0.2.13", 
         "jshint-stylish": "~2.2.1", 
         "load-grunt-tasks": "~3.5.2", 
-        "request": "~2.74.0"
+        "request": "~2.79.0"
     }, 
-    "homepage": "https://github.com/dpjanes/node-iotdb",
+    "homepage": "https://github.com/dpjanes/node-iotdb", 
     "homestar": {}, 
     "license": "Apache-2.0", 
     "main": "index.js", 
@@ -33,5 +33,5 @@
     "scripts": {
         "test": "grunt"
     }, 
-    "version": "0.1.19"
+    "version": "1.0.2"
 }
